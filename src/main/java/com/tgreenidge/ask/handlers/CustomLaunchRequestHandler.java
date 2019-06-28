@@ -25,10 +25,7 @@ public class CustomLaunchRequestHandler implements LaunchRequestHandler {
         logger.info("Received unrecognized request: " + input.getRequestEnvelopeJson());
 
         return input.getResponseBuilder()
-                .withSpeech("This Doubly Recipes Skill allows you to get a recipe that was created on Doubly. " +
-                        " You can say Alexa, ask Doubly to get me the Honey Glazed Salmon Recipe. " +
-                        "Or, Alexa, ask Doubly to tell me the prep time for this recipe. " +
-                        "You can also say Alexa, ask Doubly to tell me the ingredients, or tell me the next step.")
+                .withSpeech("This is the Chef Mate skill.")
                 .build();
     }
 }
