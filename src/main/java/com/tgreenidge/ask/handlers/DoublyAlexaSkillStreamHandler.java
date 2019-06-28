@@ -10,6 +10,9 @@ public class DoublyAlexaSkillStreamHandler extends SkillStreamHandler {
                 //add all the request handlers for Alex
                 .addRequestHandler(new WelcomeRequestHandler())
                 .addRequestHandler(new CustomLaunchRequestHandler())
+                .addRequestHandler(new GetRecipeRequestHandler())
+                .addRequestHandler(new GetCookTimeRequestHandler())
+                .addRequestHandler(new GetPrepTimeRequestHandler())
                 .build());
     }
 }

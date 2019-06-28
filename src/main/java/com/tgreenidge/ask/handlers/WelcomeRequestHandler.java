@@ -17,7 +17,10 @@ public class WelcomeRequestHandler implements RequestHandler {
     @Override
     public Optional<Response> handle(HandlerInput handlerInput) {
         return handlerInput.getResponseBuilder()
-                .withSpeech("Welcome. ")
+                .withSpeech("The Chef Mate Skill allows you to get a recipe that was created on the Chef mate website. " +
+                        "You can say Alexa, ask Chef mate to get me the Honey Glazed Salmon Recipe. " +
+                        "Or, Alexa, ask Chef Mate to tell me the prep time for this recipe. " +
+                        "You can also say Alexa, ask Chef mate to tell me the ingredients, or tell me the next step.")
                 .build();
     }
 }
