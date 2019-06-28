@@ -1,9 +1,18 @@
 package com.tgreenidge.ask.handlers;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Ingredient {
+    @JsonProperty
     long id;
+
+    @JsonProperty
     String name;
+
+    @JsonProperty
     String quantity;
+
+    public Ingredient(){}
 
     public Ingredient(Long id, String name, String quantity) {
         this.id = id;
