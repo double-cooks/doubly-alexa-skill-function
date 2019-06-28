@@ -4,7 +4,6 @@ import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.Response;
 import com.amazon.ask.request.RequestHelper;
-
 import org.slf4j.Logger;
 
 import java.util.Optional;
@@ -12,15 +11,13 @@ import java.util.Optional;
 import static com.amazon.ask.request.Predicates.intentName;
 import static org.slf4j.LoggerFactory.getLogger;
 
-public class GetRecipeRequestHandler implements RequestHandler {
+public class GetIngredientsRequestHandler implements RequestHandler {
     private static Logger logger = getLogger(GetRecipeRequestHandler.class);
 
-
     @Override
-    public boolean canHandle(HandlerInput input) {
-        return input.matches(intentName("GetRecipeIntent"));
+    public boolean canHandle(HandlerInput handlerInput) {
+        return handlerInput.matches(intentName("GetIngredientsIntent"));
     }
-
 
     @Override
     public Optional<Response> handle(HandlerInput handlerInput) {
@@ -34,17 +31,9 @@ public class GetRecipeRequestHandler implements RequestHandler {
         String title = recipeName.map(name -> name.toLowerCase())
                 .orElse("Hello World! I'm sorry, I don't yet know your recipe name.");
 
-        String recipeInfo = ApiHelper.getRecipe(title);
-
-        if (title.equals("Hello World! I'm sorry, I don't yet know your recipe name."))
-            return handlerInput.getResponseBuilder()
-                    .withSpeech(title)
-                    .build();
-
+        String ingredients = ApiHelper.getIngredients(title);
         return handlerInput.getResponseBuilder()
-                    .withSpeech(recipeInfo)
-                    .build();
-
+                .withSpeech(ingredients)
+                .build();
     }
-
 }

@@ -33,7 +33,7 @@ public class GetPrepTimeRequestHandler implements RequestHandler {
 
         String prepTime = ApiHelper.getPrepTime(title);
         return handlerInput.getResponseBuilder()
-                .withSpeech(prepTime)
+                .withSpeech("The prep time for the " + title + " recipe is " + prepTime)
                 .build();
     }
 }

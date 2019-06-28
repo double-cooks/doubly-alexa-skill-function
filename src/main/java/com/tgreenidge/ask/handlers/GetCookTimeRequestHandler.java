@@ -33,7 +33,7 @@ public class GetCookTimeRequestHandler implements RequestHandler {
 
         String cookTime = ApiHelper.getCookTime(title);
         return handlerInput.getResponseBuilder()
-                .withSpeech(cookTime)
+                .withSpeech("The cook time for the " + title + " recipe is " + cookTime)
                 .build();
     }
 }
