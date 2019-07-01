@@ -21,7 +21,7 @@ public class FallbackRequestHandler implements RequestHandler {
 
     @Override
     public Optional<Response> handle(HandlerInput input) {
-        String speechText = "Sorry, I don't know that. You can try repeating the question!";
+        String speechText = "Sorry, I don't know that. You can try repeating the question! blah";
         return input.getResponseBuilder()
                 .withSpeech(speechText)
                 .withSimpleCard("HelloWorld", speechText)

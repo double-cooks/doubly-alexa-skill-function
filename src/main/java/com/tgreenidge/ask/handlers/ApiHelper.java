@@ -41,28 +41,33 @@ public class ApiHelper {
             URL url = new URL("http://recipe-app-dev.us-west-2.elasticbeanstalk.com/alexa/recipes/" + title);
 
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
+            con.setRequestMethod("GET");
+            int responseCode = con.getResponseCode();
 
-            // this line of code actually goes to the internet!
-            BufferedReader reader = new BufferedReader(new InputStreamReader((con.getInputStream())));
+            if (responseCode == HttpURLConnection.HTTP_OK) {
 
-            String recipeString = reader.readLine();
-            reader.close();
+                // this line of code actually goes to the internet!
+                BufferedReader reader = new BufferedReader(new InputStreamReader((con.getInputStream())));
 
-            //reference https://www.javatips.net/api/seldon-server-master/server/test/main/io/seldon/general/ItemStorageTest.java
-            ObjectMapper mapper = new ObjectMapper();
-            TypeReference t = new TypeReference<List<Recipe>>() {};
+                String recipeString = reader.readLine();
+                reader.close();
 
-            recipeList = mapper.readValue(recipeString, t);
+                //reference https://www.javatips.net/api/seldon-server-master/server/test/main/io/seldon/general/ItemStorageTest.java
+                ObjectMapper mapper = new ObjectMapper();
+                TypeReference t = new TypeReference<List<Recipe>>() {
+                };
 
-            if(recipeList.size() > 0) {
-                recipe = recipeList.get(0);
-                success = true;
-                prepTime = recipe.prepTime;
-                cookTime = recipe.cookTime;
-                ingredients = recipe.ingredients.stream().map(Object::toString).collect(Collectors.joining(", "));
-                steps = recipe.steps.stream().map(Object::toString).collect(Collectors.joining(", "));
+                recipeList = mapper.readValue(recipeString, t);
+
+                if (recipeList.size() > 0) {
+                    recipe = recipeList.get(0);
+                    success = true;
+                    prepTime = recipe.prepTime;
+                    cookTime = recipe.cookTime;
+                    ingredients = recipe.ingredients.stream().map(Object::toString).collect(Collectors.joining(", "));
+                    steps = recipe.steps.stream().map(Object::toString).collect(Collectors.joining(", "));
+                }
             }
-
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             throw new AskSdkException("500: File not found exception");
